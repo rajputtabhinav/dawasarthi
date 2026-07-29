@@ -1,0 +1,30 @@
+##### nvme0 #####
+ Timing O_DIRECT disk reads: 9626 MB in  3.00 seconds = 3208.63 MB/sec
+ Timing O_DIRECT disk reads: 9676 MB in  3.00 seconds = 3225.28 MB/sec
+-- dd write 8GiB --
+8589934592 bytes (8.6 GB, 8.0 GiB) copied, 2.23607 s, 3.8 GB/s
+-- dd read 8GiB --
+8589934592 bytes (8.6 GB, 8.0 GiB) copied, 3.92838 s, 2.2 GB/s
+-- ioping 20x4K --
+19 requests completed in 3.16 ms, 76 KiB read, 6.01 k iops, 23.5 MiB/s
+generated 20 requests in 19.0 s, 80 KiB, 1 iops, 4.21 KiB/s
+min/avg/max/mdev = 76.0 us / 166.3 us / 300.6 us / 71.0 us
+-- ioping seek 5s --
+69.3 k requests completed in 4.94 s, 270.7 MiB read, 14.0 k iops, 54.8 MiB/s
+generated 69.3 k requests in 5.00 s, 270.7 MiB, 13.9 k iops, 54.1 MiB/s
+min/avg/max/mdev = 10.8 us / 71.2 us / 353.7 us / 50.2 us
+##### nvme1 #####
+ Timing O_DIRECT disk reads: 6558 MB in  3.00 seconds = 2185.53 MB/sec
+ Timing O_DIRECT disk reads: 6552 MB in  3.00 seconds = 2183.64 MB/sec
+-- dd write 8GiB --
+8589934592 bytes (8.6 GB, 8.0 GiB) copied, 2.75574 s, 3.1 GB/s
+-- dd read 8GiB --
+8589934592 bytes (8.6 GB, 8.0 GiB) copied, 3.35417 s, 2.6 GB/s
+-- ioping 20x4K --
+19 requests completed in 2.46 ms, 76 KiB read, 7.72 k iops, 30.2 MiB/s
+generated 20 requests in 19.0 s, 80 KiB, 1 iops, 4.21 KiB/s
+min/avg/max/mdev = 70.7 us / 129.5 us / 285.7 us / 86.6 us
+-- ioping seek 5s --
+96.8 k requests completed in 4.90 s, 378.1 MiB read, 19.8 k iops, 77.2 MiB/s
+generated 96.8 k requests in 5.00 s, 378.1 MiB, 19.4 k iops, 75.6 MiB/s
+min/avg/max/mdev = 11.3 us / 50.6 us / 309.7 us / 40.7 us

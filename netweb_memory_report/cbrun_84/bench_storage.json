@@ -1,0 +1,70 @@
+[
+  {
+    "dev": "/dev/nvme0n1",
+    "label": "nvme0",
+    "link": "Gen4 x4",
+    "link_capable": "Gen4 x4",
+    "link_negotiated_gbs": 7.88,
+    "link_capable_gbs": 7.88,
+    "link_width_warn": null,
+    "seq_read_gbs": 7.436,
+    "seq_write_gbs": 6.477,
+    "rand_read_iops": 1514299,
+    "p99_9_read_us": 419.8,
+    "fob_rand_write_iops": 1472569,
+    "rand_write_iops": 1483277,
+    "steady_rand_write_iops": 1483277,
+    "qd1_read_us": 82.6,
+    "qd1_write_us": 10.1,
+    "tail": {
+      "read": {
+        "p99": 387.1,
+        "p99_9": 419.8,
+        "p99_99": 561.2,
+        "p99_999": null,
+        "max": 3643.0
+      },
+      "write": {
+        "p99": 362.5,
+        "p99_9": 1302.5,
+        "p99_99": 6455.3,
+        "p99_999": null,
+        "max": 7332.7
+      }
+    }
+  },
+  {
+    "dev": "/dev/nvme1n1",
+    "label": "nvme1",
+    "link": "Gen4 x4",
+    "link_capable": "Gen4 x4",
+    "link_negotiated_gbs": 7.88,
+    "link_capable_gbs": 7.88,
+    "link_width_warn": null,
+    "seq_read_gbs": 7.24,
+    "seq_write_gbs": 4.106,
+    "rand_read_iops": 1138809,
+    "p99_9_read_us": 1155.1,
+    "fob_rand_write_iops": 879873,
+    "rand_write_iops": 936583,
+    "steady_rand_write_iops": 936583,
+    "qd1_read_us": 69.4,
+    "qd1_write_us": 12.7,
+    "tail": {
+      "read": {
+        "p99": 561.2,
+        "p99_9": 1155.1,
+        "p99_99": 1564.7,
+        "p99_999": null,
+        "max": 3662.8
+      },
+      "write": {
+        "p99": 790.5,
+        "p99_9": 1400.8,
+        "p99_99": 7176.2,
+        "p99_999": null,
+        "max": 7783.5
+      }
+    }
+  }
+]

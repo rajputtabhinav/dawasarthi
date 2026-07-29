@@ -1,0 +1,38 @@
+
+
+======= osu_latency =======
+
+# OSU MPI Latency Test v7.4
+# Datatype: MPI_CHAR.
+# Size       Avg Latency(us)
+
+
+
+======= osu_bw =======
+
+# OSU MPI Bandwidth Test v7.4
+# Datatype: MPI_CHAR.
+# Size      Bandwidth (MB/s)
+
+
+
+======= osu_bibw =======
+
+# OSU MPI Bi-Directional Bandwidth Test v7.4
+# Datatype: MPI_CHAR.
+# Size      Bandwidth (MB/s)
+
+
+
+======= osu_multi_lat =======
+
+# OSU MPI Multi Latency Test v7.4
+
+
+
+======= osu_mbw_mr =======
+# OSU MPI Multiple Bandwidth / Message Rate Test v7.4
+# [ pairs: 1 ] [ window size: 64 ]
+# Datatype: MPI_CHAR.
+# Size                  MB/s        Messages/s
+

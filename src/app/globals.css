@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f4f7f8;
+  --foreground: #112031;
+  --muted-foreground: #586779;
+  --border: #d9e2e8;
+  --card: #ffffff;
+  --brand-50: #e8f4f6;
+  --brand-100: #d4ecf0;
+  --brand-200: #b4dfe7;
+  --brand-300: #8bc7d4;
+  --brand-500: #2b8fa7;
+  --brand-600: #216c85;
+  --brand-700: #184f63;
+  --brand-800: #133f50;
+  --brand-900: #0c2c39;
+  --accent: #edf7ef;
+  --accent-foreground: #22613a;
+  --shadow-soft: 0 20px 60px rgba(17, 32, 49, 0.08);
+  --shadow-card: 0 8px 30px rgba(17, 32, 49, 0.06);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-plex-mono);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-card: var(--shadow-card);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope), sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+/**
+ * Mobile only: block sideways page scroll (matches Tailwind `sm` breakpoint at 640px).
+ * Rows with `overflow-x-auto` still scroll horizontally inside their box.
+ */
+@media (max-width: 639px) {
+  html {
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body {
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  }
+}
+
+a,
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+input[type="range"] {
+  accent-color: var(--brand-700);
+}
+
+::selection {
+  background: rgba(43, 143, 167, 0.18);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Print styles for the admin packing-slip page ──────────────────────
+   Hide the page chrome (background, toolbar) and let the .slip element
+   fill the printed page. `.no-print` is used on the on-screen-only
+   toolbar inside /admin/orders/[id]/print. */
+@page {
+  size: A5;
+  margin: 6mm;
+}
+@media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .slip,
+  .slip * {
+    visibility: visible;
+  }
+  .slip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  /* Avoid awkward page breaks mid-section */
+  .slip section,
+  .slip header,
+  .slip footer {
+    page-break-inside: avoid;
+  }
+}

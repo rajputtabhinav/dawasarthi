@@ -1,0 +1,25 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "corebench",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:/Users/asus/Desktop/CoreBench", "run", "dev"],
+      "port": 3000
+    },
+    {
+      "name": "onepct-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:/Users/asus/Desktop/1%", "run", "dev", "-w", "apps/web"],
+      "port": 3000,
+      "autoPort": true
+    },
+    {
+      "name": "amatic-dev",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["--cwd", "C:/Users/asus/Desktop/Amatic/amatic-app", "dev:full"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

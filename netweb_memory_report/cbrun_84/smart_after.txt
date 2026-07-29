@@ -1,0 +1,13 @@
+== post SMART ==
+-- nvme0 --
+critical_warning			: 0
+temperature				: 98 °F (310 K)
+percentage_used				: 0%
+media_errors				: 0
+num_err_log_entries			: 0
+-- nvme1 --
+critical_warning			: 0
+temperature				: 134 °F (330 K)
+percentage_used				: 0%
+media_errors				: 0
+num_err_log_entries			: 0

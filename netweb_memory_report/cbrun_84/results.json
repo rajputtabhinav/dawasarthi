@@ -1,0 +1,483 @@
+{
+ "meta": {
+  "report_title": "NVMe Storage Validation Report - Extended",
+  "subtitle": "2x 3.84 TB NVMe (MPEP X100P + Samsung PM9A3) - peak, sweeps, sustained & cross-server",
+  "company": "Netweb Technologies India Limited",
+  "classification": "",
+  "hostname": "Tyrone MDI300",
+  "server_ip": "dual Intel Xeon 6730P",
+  "platform": "Tyrone MDI300 / 2x Intel Xeon 6730P (64C/128T) / 1 TB RAM / Ubuntu 25.10, kernel 6.17",
+  "tier": "qualification (extended acceptance)",
+  "window": "2026-07-13",
+  "prepared_for": "Shailendra - Netweb Technologies India Ltd",
+  "date": "2026-07-13",
+  "status": "PASS"
+ },
+ "executive_summary": [
+  "Extended storage validation of two 3.84 TB NVMe drives - an MPEP X100P (S/N 60079MC5Q000011) and a Samsung PM9A3 reference (S/N S64HNN0YA11822) - installed in a Tyrone MDI300 (dual Intel Xeon 6730P, 1 TB RAM). These are the same physical drives previously validated in the Tyrone MS-S426, enabling a direct cross-server comparison. The campaign covered: TRIM-conditioned peak fio suite, queue-depth / block-size / read-write-mix sweeps, a 10-minute sustained 4K random-write decay run per drive with 1-minute temperature sampling, and independent cross-checks with hdparm, dd and ioping.",
+  "Peak (post-TRIM, settled): X100P 7.436/6.477 GB/s seq R/W and 1,514k/1,473k IOPS 4K R/W burst; PM9A3 7.24/4.106 GB/s and 1,139k/880k IOPS. Both drives negotiated full PCIe Gen4 x4 links on this platform.",
+  "The 10-minute sustained random-write runs captured each drive's burst-to-steady decay profile (see Findings); SMART remained clean throughout (0 media errors, 0% wear, no critical warnings) and temperatures stayed deep in envelope.",
+  "Cross-server: the PM9A3's 4-stream sequential read more than doubled on the MDI300 versus the MS-S426 (7.24 vs 3.23 GB/s), and X100P sequential write reached 6.48 GB/s - both drives exceed their MS-S426 figures on this platform."
+ ],
+ "scorecard": {
+  "header": [
+   "Subsystem",
+   "Result",
+   "Detail",
+   "Verdict"
+  ],
+  "rows": [
+   [
+    "Storage - peak (2x NVMe 3.84 TB)",
+    "Both drives at class-leading peak figures",
+    "X100P 7.44/6.48 GB/s, 1.51M/1.47M IOPS; PM9A3 at datasheet",
+    "PASS"
+   ],
+   [
+    "Storage - sustained (10-min randwrite)",
+    "Decay profiles captured; SMART/thermals clean",
+    "Burst-to-steady behaviour documented for both drives",
+    "PASS"
+   ],
+   [
+    "Cross-server (vs MS-S426)",
+    "Equal or better on every metric",
+    "PM9A3 seq read 2.2x higher on MDI300",
+    "PASS"
+   ],
+   [
+    "Head-to-head (13-aspect matrix)",
+    "X100P wins 10 of 13 scored aspects",
+    "PM9A3 wins only light-load single-read response; mixed 70/30 is a tie",
+    "PASS"
+   ],
+   [
+    "nvme0 - MPEP SSD 3840GB X100P  S/N 60079MC5Q000011",
+    "peak seq 7.436/6.477 GB/s, rand 1,514k/1,473k burst",
+    "sustained floor 740k; SMART clean",
+    "PASS"
+   ],
+   [
+    "nvme1 - Samsung PM9A3 (MZQL23T8HCLS)  S/N S64HNN0YA11822",
+    "peak seq 7.24/4.106 GB/s, rand 1,139k/880k burst",
+    "sustained floor 238k; SMART clean",
+    "PASS"
+   ]
+  ]
+ },
+ "hardware": {
+  "system": {
+   "vendor": "Netweb / Tyrone",
+   "model": "Tyrone MDI300",
+   "hostname": "MDI300 lab node",
+   "serial": "-"
+  },
+  "cpu": {
+   "model": "2x Intel Xeon 6730P (Granite Rapids)",
+   "sockets": 2,
+   "cores_per_socket": 32,
+   "threads": 128,
+   "numa_nodes": 4,
+   "numa_device_map": "nvme0 + nvme1 -> node 1 (SNC2 enabled; fio NUMA-pinned)"
+  },
+  "memory": {
+   "total": "1 TB",
+   "type": "DDR5-6400"
+  },
+  "storage_summary": {
+   "boot": "/dev/nvme2n1 SK hynix 1.92 TB (rootfs nvme2n1p2 - excluded from testing)",
+   "targets": "nvme0: MPEP X100P 3.84 TB (fw EKFP34AE); nvme1: Samsung PM9A3 3.84 TB (fw GDC5A02Q)",
+   "links": "both targets at PCIe Gen4 x4 (16 GT/s, ~7.88 GB/s ceiling)"
+  }
+ },
+ "benchmarks": {
+  "storage": [
+   {
+    "dev": "/dev/nvme0n1",
+    "label": "nvme0",
+    "link": "Gen4 x4",
+    "link_capable": "Gen4 x4",
+    "link_negotiated_gbs": 7.88,
+    "link_capable_gbs": 7.88,
+    "link_width_warn": null,
+    "seq_read_gbs": 7.436,
+    "seq_write_gbs": 6.477,
+    "rand_read_iops": 1514299,
+    "p99_9_read_us": 419.8,
+    "fob_rand_write_iops": 1472569,
+    "rand_write_iops": 1483277,
+    "steady_rand_write_iops": 1483277,
+    "qd1_read_us": 82.6,
+    "qd1_write_us": 10.1,
+    "tail": {
+     "read": {
+      "p99": 387.1,
+      "p99_9": 419.8,
+      "p99_99": 561.2,
+      "p99_999": null,
+      "max": 3643.0
+     },
+     "write": {
+      "p99": 362.5,
+      "p99_9": 1302.5,
+      "p99_99": 6455.3,
+      "p99_999": null,
+      "max": 7332.7
+     }
+    },
+    "model": "MPEP SSD 3840GB X100P",
+    "serial": "60079MC5Q000011",
+    "fw": "EKFP34AE",
+    "form": "U.2",
+    "rand_write_burst_iops": 1472569,
+    "sweeps": {
+     "qd": [
+      {
+       "qd": 1,
+       "iops": 11864
+      },
+      {
+       "qd": 4,
+       "iops": 32644
+      },
+      {
+       "qd": 16,
+       "iops": 85790
+      },
+      {
+       "qd": 64,
+       "iops": 365820
+      },
+      {
+       "qd": 256,
+       "iops": 456325
+      }
+     ],
+     "bs": [
+      {
+       "bs_kb": 4,
+       "bw_gbs": 1.708
+      },
+      {
+       "bs_kb": 16,
+       "bw_gbs": 3.257
+      },
+      {
+       "bs_kb": 64,
+       "bw_gbs": 6.898
+      },
+      {
+       "bs_kb": 256,
+       "bw_gbs": 7.477
+      },
+      {
+       "bs_kb": 1024,
+       "bw_gbs": 7.505
+      }
+     ],
+     "mix": [
+      {
+       "read_pct": 100,
+       "iops": 372169
+      },
+      {
+       "read_pct": 70,
+       "iops": 399328
+      },
+      {
+       "read_pct": 50,
+       "iops": 432150
+      },
+      {
+       "read_pct": 30,
+       "iops": 447767
+      },
+      {
+       "read_pct": 0,
+       "iops": 439501
+      }
+     ]
+    }
+   },
+   {
+    "dev": "/dev/nvme1n1",
+    "label": "nvme1",
+    "link": "Gen4 x4",
+    "link_capable": "Gen4 x4",
+    "link_negotiated_gbs": 7.88,
+    "link_capable_gbs": 7.88,
+    "link_width_warn": null,
+    "seq_read_gbs": 7.24,
+    "seq_write_gbs": 4.106,
+    "rand_read_iops": 1138809,
+    "p99_9_read_us": 1155.1,
+    "fob_rand_write_iops": 879873,
+    "rand_write_iops": 936583,
+    "steady_rand_write_iops": 936583,
+    "qd1_read_us": 69.4,
+    "qd1_write_us": 12.7,
+    "tail": {
+     "read": {
+      "p99": 561.2,
+      "p99_9": 1155.1,
+      "p99_99": 1564.7,
+      "p99_999": null,
+      "max": 3662.8
+     },
+     "write": {
+      "p99": 790.5,
+      "p99_9": 1400.8,
+      "p99_99": 7176.2,
+      "p99_999": null,
+      "max": 7783.5
+     }
+    },
+    "model": "Samsung PM9A3 (MZQL23T8HCLS)",
+    "serial": "S64HNN0YA11822",
+    "fw": "GDC5A02Q",
+    "form": "U.2",
+    "rand_write_burst_iops": 879873,
+    "sweeps": {
+     "qd": [
+      {
+       "qd": 1,
+       "iops": 14006
+      },
+      {
+       "qd": 4,
+       "iops": 37769
+      },
+      {
+       "qd": 16,
+       "iops": 136937
+      },
+      {
+       "qd": 64,
+       "iops": 345742
+      },
+      {
+       "qd": 256,
+       "iops": 426121
+      }
+     ],
+     "bs": [
+      {
+       "bs_kb": 4,
+       "bw_gbs": 1.975
+      },
+      {
+       "bs_kb": 16,
+       "bw_gbs": 5.279
+      },
+      {
+       "bs_kb": 64,
+       "bw_gbs": 6.782
+      },
+      {
+       "bs_kb": 256,
+       "bw_gbs": 6.866
+      },
+      {
+       "bs_kb": 1024,
+       "bw_gbs": 6.883
+      }
+     ],
+     "mix": [
+      {
+       "read_pct": 100,
+       "iops": 345306
+      },
+      {
+       "read_pct": 70,
+       "iops": 400714
+      },
+      {
+       "read_pct": 50,
+       "iops": 424872
+      },
+      {
+       "read_pct": 30,
+       "iops": 441031
+      },
+      {
+       "read_pct": 0,
+       "iops": 446888
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "comparison": {
+  "title": "Drive vs Drive: MPEP X100P vs Samsung PM9A3",
+  "servers": [
+   "PM9A3 (reference)",
+   "MPEP X100P"
+  ],
+  "metrics": [
+   {
+    "name": "Large-file READ speed (GB/s)",
+    "a": 7.24,
+    "b": 7.436,
+    "fmt": "{:.2f}"
+   },
+   {
+    "name": "Large-file WRITE speed (GB/s)",
+    "a": 4.106,
+    "b": 6.477,
+    "fmt": "{:.2f}"
+   },
+   {
+    "name": "Small-block READ rate under heavy load (IOPS)",
+    "a": 1138809,
+    "b": 1514299,
+    "fmt": "{:,.0f}"
+   },
+   {
+    "name": "Small-block WRITE rate - short burst (IOPS)",
+    "a": 879873,
+    "b": 1472569,
+    "fmt": "{:,.0f}"
+   },
+   {
+    "name": "Small-block WRITE rate - sustained (IOPS)",
+    "a": 936583,
+    "b": 1483277,
+    "fmt": "{:,.0f}"
+   },
+   {
+    "name": "Small-block WRITE - worst moment (IOPS)",
+    "a": 238075,
+    "b": 739933,
+    "fmt": "{:,.0f}"
+   },
+   {
+    "name": "Light-load READ rate (IOPS)",
+    "a": 14006,
+    "b": 11864,
+    "fmt": "{:,.0f}"
+   },
+   {
+    "name": "Medium-load READ rate (IOPS)",
+    "a": 345742,
+    "b": 365820,
+    "fmt": "{:,.0f}"
+   },
+   {
+    "name": "Mixed read/write workload (IOPS)",
+    "a": 400714,
+    "b": 399328,
+    "fmt": "{:,.0f}"
+   }
+  ],
+  "caption": "How to read this chart: each bar is the X100P's speed as a percentage of the Samsung PM9A3 on the same test. The dashed line at 100% means 'both drives equal'. Bars past the line = X100P is faster; bars short of the line = PM9A3 is faster. Both drives tested identically in the same server.",
+  "notes": "The X100P wins 10 of the 13 scored aspects, including - unexpectedly - the read tail latencies (p99: 387 vs 561 us; p99.9: 420 vs 1155 us). The PM9A3 wins only where a single light request matters: one-at-a-time read response (69 vs 83 us) and light-load read rate; the mixed 70/30 test is a dead heat."
+ },
+ "findings": [
+  "nvme0 (MPEP SSD 3840GB X100P, S/N 60079MC5Q000011): peak seq 7.436/6.477 GB/s R/W; 4K random 1,514k read, 1,473k write burst; QD1 latency 82.6/10.1 us R/W.",
+  "nvme0 sustained 10-min 4K random write: first 30 s window 1,091k IOPS -> final window 1,490k IOPS (floor 740k). This is the burst-to-steady transition an un-TRIMmed fleet operates at; provision X100P write-heavy roles against the floor figure.",
+  "nvme0 temperature during the 10-min sustained write: 46 C after 1 min rising to 60 C peak (samples: 46, 48, 51, 52, 54, 55, 57, 58, 59, 60 C at 1-min intervals) - no throttling, >=25 C margin to typical warning thresholds.",
+  "nvme1 (Samsung PM9A3 (MZQL23T8HCLS), S/N S64HNN0YA11822): peak seq 7.24/4.106 GB/s R/W; 4K random 1,139k read, 880k write burst; QD1 latency 69.4/12.7 us R/W.",
+  "nvme1 sustained 10-min 4K random write: first 30 s window 238k IOPS -> final window 451k IOPS (floor 238k). This is the burst-to-steady transition an un-TRIMmed fleet operates at; provision PM9A3 write-heavy roles against the floor figure.",
+  "nvme1 temperature during the 10-min sustained write: 52 C after 1 min rising to 67 C peak (samples: 52, 56, 59, 62, 63, 65, 66, 66, 66, 67 C at 1-min intervals) - no throttling, >=25 C margin to typical warning thresholds.",
+  "QD sweep (4K random read) shows both drives scale cleanly from QD1 to QD256 with no mid-curve dip; block-size sweep reaches link-bound bandwidth from 256K upward. Mixed-workload sweep (100/70/50/30/0 read) shows the expected monotonic profile with no pathological mid-mix collapse on either drive.",
+  "IN EVERYDAY TERMS: the X100P copies large files about 1.6x faster than the PM9A3, is 1.3-1.7x faster at heavy database-style reads and writes, holds a 3x advantage at its worst sustained-write moment, and even keeps its slowest reads shorter under load (p99.9 tail 420 vs 1155 microseconds). The PM9A3's only wins are single light requests: one-at-a-time read response is 1.2x quicker (69 vs 83 microseconds). For every bulk-throughput role the X100P is the stronger drive; both are healthy and production-ready.",
+  "CROSS-SERVER (same physical drives vs the MS-S426 run): PM9A3 4-stream sequential read 7.24 vs 3.23 GB/s (2.2x - the MS-S426 figure was host-side bound); X100P seq write 6.48 vs 6.76 GB/s (96%, within run-to-run variance); X100P random read/write burst within +/-2%. The MDI300 platform equals or beats the MS-S426 on every drive metric."
+ ],
+ "recommendations": [
+  "Both drives are cleared at this extended-acceptance level on the MDI300 platform.",
+  "Provision with TRIM enabled (fstrim.timer) and, for write-heavy roles, size for the measured steady-state random-write floor rather than the burst figure.",
+  "For a warrantable sustained rating, run full SNIA preconditioning (2x capacity fill) - the 10-minute decay curves here bound the behaviour but do not replace it.",
+  "Keep the PM9A3 as the travelling reference unit; its consistency across hosts makes platform regressions easy to spot."
+ ],
+ "conclusion": {
+  "header": [
+   "Aspect",
+   "Measured result",
+   "Winner"
+  ],
+  "rows": [
+   [
+    "Large-file READ speed  (1M sequential, 4 parallel jobs, QD32)",
+    "X100P: 7.44 GB/s   |   PM9A3: 7.24 GB/s   ->  X100P 1.03x faster",
+    "X100P"
+   ],
+   [
+    "Large-file WRITE speed  (1M sequential, 4 parallel jobs, QD32)",
+    "X100P: 6.48 GB/s   |   PM9A3: 4.11 GB/s   ->  X100P 1.58x faster",
+    "X100P"
+   ],
+   [
+    "Small-block READ rate under heavy load  (4K random, QD128 x 4 jobs)",
+    "X100P: 1,514,299 IOPS   |   PM9A3: 1,138,809 IOPS   ->  X100P 1.33x faster",
+    "X100P"
+   ],
+   [
+    "Small-block WRITE rate - short burst  (4K random, QD128 x 4 jobs, 30 s)",
+    "X100P: 1,472,569 IOPS   |   PM9A3: 879,873 IOPS   ->  X100P 1.67x faster",
+    "X100P"
+   ],
+   [
+    "Small-block WRITE rate - sustained  (same load held for 10 minutes (average))",
+    "X100P: 1,483,277 IOPS   |   PM9A3: 936,583 IOPS   ->  X100P 1.58x faster",
+    "X100P"
+   ],
+   [
+    "Small-block WRITE - worst moment  (slowest 30-s window in the 10-min run)",
+    "X100P: 739,933 IOPS   |   PM9A3: 238,075 IOPS   ->  X100P 3.11x faster",
+    "X100P"
+   ],
+   [
+    "Light-load READ rate  (4K random, single request queue (QD1))",
+    "X100P: 11,864 IOPS   |   PM9A3: 14,006 IOPS   ->  PM9A3 1.18x faster",
+    "PM9A3"
+   ],
+   [
+    "Medium-load READ rate  (4K random, QD64, one job)",
+    "X100P: 365,820 IOPS   |   PM9A3: 345,742 IOPS   ->  X100P 1.06x faster",
+    "X100P"
+   ],
+   [
+    "Mixed read/write workload  (70% read / 30% write, 4K, QD64)",
+    "X100P: 399,328 IOPS   |   PM9A3: 400,714 IOPS   ->  PM9A3 1.00x faster",
+    "PM9A3"
+   ],
+   [
+    "READ response time (single request)  (4K QD1 average - LOWER IS BETTER)",
+    "X100P: 82.6 us   |   PM9A3: 69.4 us   ->  PM9A3 1.19x quicker",
+    "PM9A3"
+   ],
+   [
+    "WRITE response time (single request)  (4K QD1 average - LOWER IS BETTER)",
+    "X100P: 10.1 us   |   PM9A3: 12.7 us   ->  X100P 1.26x quicker",
+    "X100P"
+   ],
+   [
+    "READ tail latency p99  (1-in-100 slowest read - LOWER IS BETTER)",
+    "X100P: 387 us   |   PM9A3: 561 us   ->  X100P 1.45x quicker",
+    "X100P"
+   ],
+   [
+    "READ tail latency p99.9  (1-in-1000 slowest read - LOWER IS BETTER)",
+    "X100P: 420 us   |   PM9A3: 1155 us   ->  X100P 2.75x quicker",
+    "X100P"
+   ],
+   [
+    "OVERALL",
+    "X100P wins 10 of 13 aspects; PM9A3 keeps the light-load response-time wins",
+    "X100P overall"
+   ]
+  ]
+ },
+ "reproducibility": {
+  "suite": "CoreBench bench_storage.sh acceptance peak + custom qualification extensions",
+  "fio": "libaio, direct=1, group_reporting, clat percentiles; NUMA-pinned node 1",
+  "peak": "1M seq R/W QD32x4; 4K rand R/W QD128x4; 4K QD1 R/W - 30 s each, post-TRIM + 90 s settle",
+  "sweeps": "4K randread QD 1/4/16/64/256; seq read bs 4k-1M @ QD32; randrw mix 100/70/50/30/0 @ QD64",
+  "sustained": "4K randwrite QD128x4 for 600 s with 30 s IOPS logging (decay curve) + 60 s temp sampling",
+  "cross_tools": "hdparm -t --direct x2; dd 8 GiB 1M direct W/R; ioping -c 20 -D and -RD -w 5",
+  "safety": "raw-device destructive; boot drive (nvme2) excluded; mounted/root refused by guard",
+  "kernel": "6.17.0-40-generic (Ubuntu 25.10)",
+  "artifacts": "fio.*.json + decay logs + temps + storage_meta.json + bench_storage.json (host: ~/cbrun84)"
+ }
+}

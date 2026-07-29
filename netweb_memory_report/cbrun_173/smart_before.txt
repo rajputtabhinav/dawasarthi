@@ -1,0 +1,32 @@
+-- nvme1 --
+critical_warning			: 0
+temperature				: 33 C (306 Kelvin)
+percentage_used				: 0%
+data_units_written			: 83,236,589
+power_on_hours				: 256
+media_errors				: 0
+num_err_log_entries			: 0
+-- nvme2 --
+critical_warning			: 0
+temperature				: 33 C (306 Kelvin)
+percentage_used				: 0%
+data_units_written			: 45,705,864
+power_on_hours				: 652
+media_errors				: 0
+num_err_log_entries			: 0
+-- nvme3 --
+critical_warning			: 0
+temperature				: 31 C (304 Kelvin)
+percentage_used				: 0%
+data_units_written			: 68,514,584
+power_on_hours				: 257
+media_errors				: 0
+num_err_log_entries			: 0
+-- nvme4 --
+critical_warning			: 0
+temperature				: 31 C (304 Kelvin)
+percentage_used				: 0%
+data_units_written			: 84,823,154
+power_on_hours				: 256
+media_errors				: 0
+num_err_log_entries			: 0

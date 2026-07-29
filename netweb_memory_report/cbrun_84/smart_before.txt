@@ -1,0 +1,14 @@
+-- nvme0 --
+critical_warning			: 0
+temperature				: 98 °F (310 K)
+percentage_used				: 0%
+power_on_hours				: 262
+media_errors				: 0
+num_err_log_entries			: 0
+-- nvme1 --
+critical_warning			: 0
+temperature				: 95 °F (308 K)
+percentage_used				: 0%
+power_on_hours				: 657
+media_errors				: 0
+num_err_log_entries			: 0

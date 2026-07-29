@@ -1,0 +1,24 @@
+-- nvme1 --
+critical_warning			: 0
+temperature				: 32 C (305 Kelvin)
+percentage_used				: 0%
+media_errors				: 0
+num_err_log_entries			: 0
+-- nvme2 --
+critical_warning			: 0
+temperature				: 31 C (304 Kelvin)
+percentage_used				: 0%
+media_errors				: 0
+num_err_log_entries			: 0
+-- nvme3 --
+critical_warning			: 0
+temperature				: 32 C (305 Kelvin)
+percentage_used				: 0%
+media_errors				: 0
+num_err_log_entries			: 0
+-- nvme4 --
+critical_warning			: 0
+temperature				: 37 C (310 Kelvin)
+percentage_used				: 0%
+media_errors				: 0
+num_err_log_entries			: 0
